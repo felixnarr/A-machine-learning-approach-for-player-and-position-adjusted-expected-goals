@@ -47,7 +47,6 @@ model_data <- shots %>%
   select(goal, x, y, first_time, body_part) %>%
   filter(complete.cases(.))  # entferne Zeilen mit NA
 
-# 7. Encoding für maschinelles Lernen
 install.packages("caret")
 install.packages("recipes")
 library(caret)
@@ -65,7 +64,7 @@ X <- predict(dummies, newdata = model_data)
 final_data <- data.frame(X)
 final_data$goal <- model_data$goal
 
-
+#---------------------------------------------------------------------------------
 # Beispiel: Logistic Regression
 model <- glm(goal ~ ., data = final_data, family = "binomial")
 summary(model)
@@ -104,7 +103,7 @@ messi_xg <- sum(messi_shots$shot.statsbomb_xg, na.rm = TRUE)
 messi_effizienz <- messi_goals - messi_xg
 
 # 5. Ausgabe
-cat("📊 Lionel Messi – Abschlussanalyse:\n")
+cat(" Lionel Messi – Abschlussanalyse:\n")
 cat("• Anzahl Schüsse: ", nrow(messi_shots), "\n")
 cat("• Tore: ", messi_goals, "\n")
 cat("• xG: ", round(messi_xg, 2), "\n")
@@ -134,6 +133,8 @@ ggplot(messi_stats, aes(x = Kategorie, y = Wert, fill = Kategorie)) +
   theme_minimal(base_size = 14)
 
 
+
+
 # INIESTA
 # -----------------------------------------------------------------------------
 
@@ -154,7 +155,7 @@ iniesta_xg <- sum(iniesta_shots$shot.statsbomb_xg, na.rm = TRUE)
 iniesta_effizienz <- iniesta_goals - iniesta_xg
 
 # 5. Ausgabe
-cat("📊 Andrés Iniesta – Abschlussanalyse:\n")
+cat(" Andrés Iniesta – Abschlussanalyse:\n")
 cat("• Anzahl Schüsse: ", nrow(iniesta_shots), "\n")
 cat("• Tore: ", iniesta_goals, "\n")
 cat("• xG: ", round(iniesta_xg, 2), "\n")
@@ -180,12 +181,8 @@ ggplot(iniesta_stats, aes(x = Kategorie, y = Wert, fill = Kategorie)) +
 
 
 
-
-
-#Positionsgruppen
-#----------------------------------------------------------------------------------------------
-
 # Positionsadaptiert
+#----------------------------------------------------------------------------------------------
 library(dplyr)
 library(ggplot2)
 
